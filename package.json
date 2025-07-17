@@ -1,0 +1,35 @@
+{
+	"name": "traveltales",
+	"version": "1.0.0",
+	"description": "TravelTales - A Global Journey Through Stories",
+	"scripts": {
+		"dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+		"dev:server": "cd server && npm run dev",
+		"dev:client": "cd client && npm run dev",
+		"build": "npm run build:client && npm run build:server",
+		"build:client": "cd client && npm run build",
+		"build:server": "cd server && npm install --production",
+		"start": "cd server && npm start",
+		"docker:prod": "docker-compose up --build",
+		"docker:down": "docker-compose down",
+		"install:all": "npm install && cd server && npm install && cd ../client && npm install",
+		"clean": "rm -rf node_modules server/node_modules client/node_modules server/database client/dist",
+		"lint": "cd client && npm run lint",
+		"test:server": "cd server && npm test",
+		"setup": "npm run install:all && cp .env.example .env && cp client/.env.example client/.env"
+	},
+	"devDependencies": {
+		"concurrently": "^8.2.2"
+	},
+	"keywords": [
+		"travel",
+		"blog",
+		"social",
+		"nodejs",
+		"react",
+		"express",
+		"sequelize"
+	],
+	"author": "Daniel Peiris",
+	"license": "MIT"
+}

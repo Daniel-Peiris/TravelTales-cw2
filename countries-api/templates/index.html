@@ -1,0 +1,144 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+	<div class="col-lg-10">
+		<div class="card">
+			<div class="card-body p-5">
+				<div class="text-center mb-5">
+					<h1 class="display-4 text-primary mb-3">
+						<i class="fas fa-globe"></i> Countries API Middleware
+					</h1>
+					<p class="lead">
+						Secure, streamlined access to world country data
+					</p>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="card h-100 border-primary">
+							<div class="card-body">
+								<h5 class="card-title">
+									<i
+										class="fas fa-shield-alt text-primary"
+									></i>
+									Secure Authentication
+								</h5>
+								<p class="card-text">
+									Generate API keys with robust security
+									measures including password hashing and
+									session management.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="card h-100 border-success">
+							<div class="card-body">
+								<h5 class="card-title">
+									<i class="fas fa-database text-success"></i>
+									Filtered Data
+								</h5>
+								<p class="card-text">
+									Get only essential country information:
+									names, currencies, capitals, languages, and
+									flags.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row mt-4">
+					<div class="col-md-6">
+						<div class="card h-100 border-info">
+							<div class="card-body">
+								<h5 class="card-title">
+									<i class="fas fa-chart-line text-info"></i>
+									Usage Tracking
+								</h5>
+								<p class="card-text">
+									Monitor your API usage with detailed
+									analytics and comprehensive logging.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="card h-100 border-warning">
+							<div class="card-body">
+								<h5 class="card-title">
+									<i class="fas fa-rocket text-warning"></i>
+									RESTful Design
+								</h5>
+								<p class="card-text">
+									Clean, well-documented REST API endpoints
+									following industry best practices.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="text-center mt-5">
+					{% if session.user_id %}
+					<a
+						href="{{ url_for('dashboard') }}"
+						class="btn btn-primary btn-lg me-3"
+					>
+						<i class="fas fa-tachometer-alt"></i> Go to Dashboard
+					</a>
+					{% else %}
+					<a
+						href="{{ url_for('register') }}"
+						class="btn btn-primary btn-lg me-3"
+					>
+						<i class="fas fa-user-plus"></i> Get Started
+					</a>
+					<a
+						href="{{ url_for('login') }}"
+						class="btn btn-outline-primary btn-lg"
+					>
+						<i class="fas fa-sign-in-alt"></i> Login
+					</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="card mt-4">
+			<div class="card-header">
+				<h5><i class="fas fa-code"></i> API Endpoints</h5>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-6">
+						<h6>GET /api/countries</h6>
+						<p class="text-muted">
+							Retrieve all countries with filtered data
+						</p>
+						<div class="api-key-display">
+							<small>
+								curl -H "X-API-Key: YOUR_API_KEY" \<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;{{ request.url_root
+								}}api/countries
+							</small>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<h6>GET /api/countries/{name}</h6>
+						<p class="text-muted">
+							Search for specific country by name
+						</p>
+						<div class="api-key-display">
+							<small>
+								curl -H "X-API-Key: YOUR_API_KEY" \<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;{{ request.url_root
+								}}api/countries/germany
+							</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

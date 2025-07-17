@@ -1,0 +1,36 @@
+.blog-card {
+	transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card-image {
+	transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-card-image {
+	transform: scale(1.05);
+}
+
+.blog-card-content {
+	position: relative;
+	z-index: 1;
+}
+
+.blog-card-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.blog-card:hover .blog-card-overlay {
+	opacity: 1;
+}

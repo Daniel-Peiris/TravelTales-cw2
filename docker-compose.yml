@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # Countries API Microservice (CW1)
+  countries-api:
+    build:
+      context: ./countries-api
+      dockerfile: Dockerfile
+    container_name: traveltales-countries-api
+    ports:
+      - "5000:5000"
+    environment:
+      - SECRET_KEY=${COUNTRIES_SECRET_KEY}
+      - DATABASE_NAME=countries_api.db
+    volumes:
+      - countries-db:/app/database
+    networks:
+      - traveltales-network
+    restart: unless-stopped
+
+  # TravelTales Backend
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: traveltales-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=7d
+      - DATABASE_PATH=/app/database/traveltales.db
+      - COUNTRIES_API_URL=http://countries-api:5000/api
+      - COUNTRIES_API_KEY=${COUNTRIES_API_KEY}
+      - CLIENT_URL=http://localhost:5173
+    volumes:
+      - backend-db:/app/database
+      - backend-uploads:/app/uploads
+    depends_on:
+      - countries-api
+    networks:
+      - traveltales-network
+    restart: unless-stopped
+
+  # TravelTales Frontend
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:3000/api
+    container_name: traveltales-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - traveltales-network
+    restart: unless-stopped
+
+volumes:
+  countries-db:
+    driver: local
+  backend-db:
+    driver: local
+  backend-uploads:
+    driver: local
+
+networks:
+  traveltales-network:
+    driver: bridge

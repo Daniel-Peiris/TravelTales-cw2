@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+	}
+}
+
+@layer components {
+	.line-clamp-2 {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.line-clamp-3 {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+}
+
+/* React Select Styling */
+.react-select-container .react-select__control {
+	border-radius: 0.5rem;
+	min-height: 2.5rem;
+}
+
+.react-select-container .react-select__control--is-focused {
+	border-color: #3b82f6;
+	box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.react-select-container .react-select__menu {
+	border-radius: 0.5rem;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.react-select-container .react-select__option--is-selected {
+	background-color: #3b82f6;
+}
+
+.react-select-container .react-select__option--is-focused {
+	background-color: #ebf4ff;
+	color: #374151;
+}
+
+/* Loading animation */
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.animate-spin {
+	animation: spin 1s linear infinite;
+}
+
+/* Toast styling */
+.Toastify__toast-container {
+	z-index: 9999;
+}
+
+.Toastify__toast {
+	border-radius: 0.5rem;
+}
